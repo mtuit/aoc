@@ -2,21 +2,6 @@ import numpy as np
 import math 
 import os
 import itertools
-import timeit
-
-setup='''
-import numpy as np
-import math 
-import os
-import itertools
-import timeit
-
-if os.path.exists('input/day01.txt'):
-    data = np.loadtxt('input/day01.txt')
-else: 
-    print(f"Couldn't find input file! Make sure input file is downloaded and named: 'day01.txt'")
-    exit()
-'''
 
 # Load input
 if os.path.exists('input/day01.txt'):

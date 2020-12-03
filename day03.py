@@ -1,10 +1,8 @@
-import numpy as np
-
-
 def read_input(file):
     with open(file) as f: 
         data = f.read().splitlines()
     return data
+
 
 def traverse(data, step_size):
     bot_row = len(data)
@@ -28,11 +26,9 @@ def traverse(data, step_size):
     return tree_count
 
 
-
 if __name__ == "__main__":
     file = 'input/day03.txt'
     data = read_input(file)
-    data = np.array(data)
 
     slopes = [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]
     result = 1

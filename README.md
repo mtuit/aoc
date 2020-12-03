@@ -1,2 +1,2 @@
-# aoc-2020
-Advent of Code submission for 2020.
+# Advent of Code 2020
+Advent of Code submissions for 2020, programmed in Python. 

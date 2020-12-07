@@ -38,13 +38,13 @@ def check_bag(bag, is_hold_by, accumulator):
 
 
 def cost_of_bag(bag, holds):
-        total = 0
+    total = 0
 
-        for cost, inner_bag in holds[bag]:
-            total += cost
-            total += cost * cost_of_bag(inner_bag, holds)
+    for cost, inner_bag in holds[bag]:
+        total += cost
+        total += cost * cost_of_bag(inner_bag, holds)
 
-        return total
+    return total
 
 if __name__ == "__main__":
     file = 'input/day07.txt'

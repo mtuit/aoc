@@ -8,31 +8,31 @@ def read_input(file):
 
 def build_bag_trees(data): 
     holds = collections.defaultdict(list)
-    is_hold_by = collections.defaultdict(set)
+    is_held_by = collections.defaultdict(set)
 
     for line in data: 
         bag = ' '.join(line.split(' ')[0:2])
         line = ' '.join(line.split(' ')[4:])
 
         if ',' in line: 
-            holded_by = line.split(', ')
+            inner_bags = line.split(', ')
         else: 
-            holded_by = [line]
+            inner_bags = [line]
         
-        for holds_by in holded_by: 
-            if holds_by[0] != 'n':
-                number = int(holds_by[0])
-                inner_bag = ' '.join(holds_by.split(' ')[1:3])
+        for inner_bag in inner_bags: 
+            if inner_bag[0] != 'n':
+                number = int(inner_bag[0])
+                inner_bag = ' '.join(inner_bag.split(' ')[1:3])
                 holds[bag].append((number, inner_bag))
-                is_hold_by[inner_bag].add(bag)
+                is_held_by[inner_bag].add(bag)
 
-    return holds, is_hold_by
+    return holds, is_held_by
 
 
-def check_bag(bag, is_hold_by, accumulator):
-    for hold_bag in is_hold_by[bag]:
+def check_bag(bag, is_held_by, accumulator):
+    for hold_bag in is_held_by[bag]:
         accumulator.add(hold_bag)
-        check_bag(hold_bag, is_hold_by, accumulator)
+        check_bag(hold_bag, is_held_by, accumulator)
 
     return accumulator
 
@@ -49,9 +49,9 @@ def cost_of_bag(bag, holds):
 if __name__ == "__main__":
     file = 'input/day07.txt'
     data = read_input(file)
-    holds, is_hold_by = build_bag_trees(data)
+    holds, is_held_by = build_bag_trees(data)
 
-    result1 = len(check_bag('shiny gold', is_hold_by, set()))
+    result1 = len(check_bag('shiny gold', is_held_by, set()))
     result2 = cost_of_bag('shiny gold', holds)
 
     print(f"Result for part 1: {result1}\nResult for part 2: {result2}")

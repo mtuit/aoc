@@ -1,8 +1,9 @@
-import numpy as np 
 import itertools
 
 def read_input(file):
-    return np.loadtxt(file, dtype=np.int64)
+    with open(file) as f: 
+        data = [int(x) for x in f.read().splitlines()]
+    return data
 
 def find_number(numbers, offset):
     result1 = None
@@ -15,13 +16,15 @@ def find_number(numbers, offset):
         else: 
             result1 = number
             break
-    
+
     for start in range(len(numbers)):
         for end in range(start+2, len(numbers)):
             sub_range = numbers[start:end]
             if sum(sub_range) == result1: 
                 result2 = min(sub_range) + max(sub_range)
                 return result1, result2
+            if sum(sub_range) > result1: 
+                break
 
     return result1, result2
 

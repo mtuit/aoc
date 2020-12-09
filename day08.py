@@ -32,6 +32,7 @@ def run_instructions(instructions, full_terminate=False):
 
     return acc
 
+
 def full_terminate(instructions):
     acc = None
     for idx, instruction in enumerate(instructions): 
@@ -44,7 +45,6 @@ def full_terminate(instructions):
         elif instr_type == 'nop':
             new_instruction = instruction.replace('nop', 'jmp')
 
-        
         new_instructions = copy.deepcopy(instructions)
         new_instructions[idx] = new_instruction
         acc = run_instructions(new_instructions, full_terminate=True)
@@ -53,6 +53,7 @@ def full_terminate(instructions):
             return acc
 
     return acc
+
 
 if __name__ == "__main__":
     file = 'input/day08.txt'

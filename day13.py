@@ -21,7 +21,6 @@ def chinese_remainder(n, a):
         sum += a_i * mul_inv(p, n_i) * p
     return sum % prod
  
- 
 def mul_inv(a, b):
     b0 = b
     x0, x1 = 0, 1
@@ -50,6 +49,7 @@ def solve(timestamp, busses):
     result1 = least_diff * bus_id
     return result1
 
+
 def solve2(timestamp, busses): 
     result2 = 0
     n = []
@@ -66,9 +66,11 @@ def solve2(timestamp, busses):
     return result2
 
 
+# Dirty cheating solution for part 2 using SymPy library, used this to solve the problem quickly but feld like cheating, so wrote solution using CRT as well.
 def cheating_solve_part2(data): 
     m, v = zip(*((int(bus), int(bus)-idx) for idx, bus in enumerate(data[1].split(',')) if bus != 'x'))
     return min(crt(m, v))
+
 
 if __name__ == "__main__":
     file = 'input/day13.txt'
@@ -78,5 +80,4 @@ if __name__ == "__main__":
     busses_with_x = data[1].split(',')
     result1 = solve(timestamp, busses)
     result2 = solve2(0, busses_with_x)
-    print(cheating_solve_part2(data))
     print(f"Result for part 1: {result1}\nResult for part 2: {result2}")

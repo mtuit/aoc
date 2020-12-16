@@ -66,7 +66,7 @@ def solve2(timestamp, busses):
     return result2
 
 
-# Dirty cheating solution for part 2 using SymPy library, used this to solve the problem quickly but feld like cheating, so wrote solution using CRT as well.
+# Dirty cheating solution for part 2 using SymPy library, used this to solve the problem quickly but felt like cheating, so wrote solution using CRT as well.
 def cheating_solve_part2(data): 
     m, v = zip(*((int(bus), int(bus)-idx) for idx, bus in enumerate(data[1].split(',')) if bus != 'x'))
     return min(crt(m, v))

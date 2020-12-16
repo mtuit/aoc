@@ -19,27 +19,49 @@ def get_addresses(address):
     return itertools.product('01', repeat=address.count('X'))
 
 
+def get_masks_generator(mask): 
+    if not mask:
+        yield ''
+        return
+    else: 
+        for msk in get_masks_generator(mask[1:]): 
+            if mask[0] == 'X': 
+                yield '0' + msk
+                yield '1' + msk
+            elif mask[0] == '1': 
+                yield '1' + msk
+            elif mask[0] == '0': 
+                yield 'X' + msk
+            
+
 def solve(data):
     result1, result2 = (None, None)
-    curr_mask = None
+    mask = None
     mem1 = collections.defaultdict(int)
     mem2 = collections.defaultdict(int)
+
     for instruction in data: 
         instr, value = instruction.split(' = ')
 
         if instr == 'mask': 
-            curr_mask = value
+            mask = value
         else: 
-            address = instr[4:-1]
-            mem1[address] = apply_mask(int(value), curr_mask)
+            address, value = int(instr[4:-1]), int(value)
+            mem1[address] = apply_mask(value, mask)
 
-            address_bit = f'{int(address):036b}'
-            address_masked = [address_bit[idx] if bit == '0' else bit for idx, bit in enumerate(curr_mask)]
+            # # Solve by creating new addresses
+            # address_bit = f'{address:036b}'
+            # address_masked = [address_bit[idx] if bit == '0' else bit for idx, bit in enumerate(mask)]
 
-            for new_bits in get_addresses(address_masked):
-                new_bits = iter(new_bits)
-                addr = ''.join([next(new_bits) if char == 'X' else char for char in address_masked])
-                mem2[int(addr, 2)] = int(value)
+            # for new_bits in get_addresses(address_masked):
+            #     new_bits = iter(new_bits)
+            #     addr = ''.join([next(new_bits) if char == 'X' else char for char in address_masked])
+            #     mem2[int(addr, 2)] = value
+
+            # Solve by creatings masks which are similar to part 1 so we can re-use code. 
+            # Personally I like this solution better than the one I wrote during the puzzle. 
+            for msk in get_masks_generator(mask): 
+                mem2[apply_mask(address, msk)] = value
 
     result1 = sum(mem1.values())
     result2 = sum(mem2.values())

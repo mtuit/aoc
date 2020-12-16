@@ -6,7 +6,7 @@ import itertools
 def solve(data):
     turns = {number: idx+1 for idx, number in enumerate(data)}
     last_number = data[-1]
-
+    print(turns)
     for turn in range(len(data), 30000000):
         turns[last_number], last_number = turn, turn - turns.get(last_number, turn)
 

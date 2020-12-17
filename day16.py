@@ -13,7 +13,6 @@ def solve(data):
     result1, result2 = (None, 1)
     valid, my_ticket, other_tickets = data[0], data[1].split('\n')[1], data[2]
     my_ticket = [int(x) for x in my_ticket.split(',')]
-
     matches = re.findall(r'\w+:\s(\d+-\d+)\s\w+\s(\d+-\d+)', valid)
     fields = re.findall(r'([a-z]+(?:\s[a-z]+)*):', valid)
 
@@ -61,10 +60,10 @@ def solve(data):
                             ticket_positions[key] = value
                             positions_found.append(value)
    
-        
         if len(positions_found) == 20: 
             break
 
+    result2 = 1
     for pos, col in ticket_positions.items(): 
         if pos.startswith('departure'): 
             result2 *= int(my_ticket[col])

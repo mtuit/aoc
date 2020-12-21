@@ -1,6 +1,7 @@
 import collections
 import copy
 import itertools
+import re
 
 def read_input(file):
     with open(file) as f: 

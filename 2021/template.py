@@ -16,7 +16,7 @@ def solve(data):
 
 
 if __name__ == "__main__":
-    file = 'input/dayx.txt'
+    file = '2021/input/dayxx.txt'
     data = read_input(file)
     result1, result2 = solve(data)
     print(f"Result for part 1: {result1}\nResult for part 2: {result2}")

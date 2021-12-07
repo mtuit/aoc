@@ -19,8 +19,9 @@ def solve(data):
             current_fuel += abs(crab - i)
         if current_fuel < lowest or lowest == 0: 
             lowest = current_fuel
-
+            
     return lowest
+
 
 def solve2(data):
     lowest = 0
@@ -34,6 +35,8 @@ def solve2(data):
             lowest = current_fuel
 
     return lowest
+
+
 if __name__ == "__main__":
     file = '2021/input/day07.txt'
     data = read_input(file)

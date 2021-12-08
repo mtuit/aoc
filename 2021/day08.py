@@ -13,7 +13,7 @@ def read_input(file):
 
 
 def solve(data):
-    result1, result2 = 0, None
+    result1 = 0
 
     # mapping = collections.defaultdict(int)
     for note in data: 
@@ -23,12 +23,28 @@ def solve(data):
             if len(output) in numbers:
                 result1 += 1
 
-    
-    return result1, result2
+    return result1
 
+
+wire_mapping = collections.defaultdict(str)
+number_mapping = collections.defaultdict(int)
+
+def solve2(data):
+    result = None
+    
+    for note in data: 
+        patterns, outputs = note[0].split(' '), note[1].strip().split(' ')
+
+        patterns.sort(key=len)
+        for pattern in patterns: 
+            
+
+            break
+
+    return result
 
 if __name__ == "__main__":
     file = '2021/input/day08.txt'
     data = read_input(file)
-    result1, result2 = solve(data)
+    result1, result2 = solve(data), solve2(data)
     print(f"Result for part 1: {result1}\nResult for part 2: {result2}")

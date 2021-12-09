@@ -15,9 +15,8 @@ def read_input(file):
 def solve(data):
     result1 = 0
 
-    # mapping = collections.defaultdict(int)
     for note in data: 
-        patterns, outputs = note[0].split(' '), note[1].strip().split(' ')
+        _, outputs = note[0].split(' '), note[1].strip().split(' ')
 
         for output in outputs: 
             if len(output) in numbers:
@@ -25,21 +24,42 @@ def solve(data):
 
     return result1
 
-
-wire_mapping = collections.defaultdict(str)
-number_mapping = collections.defaultdict(int)
-
 def solve2(data):
-    result = None
-    
+    result = 0
+
     for note in data: 
         patterns, outputs = note[0].split(' '), note[1].strip().split(' ')
 
-        patterns.sort(key=len)
-        for pattern in patterns: 
-            
+        key_map = collections.defaultdict(int)
+        key_map[1] = set([p for p in patterns if len(p) == 2][0])
+        key_map[7] = set([p for p in patterns if len(p) == 3][0])
+        key_map[4] = set([p for p in patterns if len(p) == 4][0])
+        key_map[8] = set([p for p in patterns if len(p) == 7][0])
 
-            break
+
+        for p in map(set, patterns): 
+            if len(p) == 5:
+                if key_map[7].issubset(p): 
+                    key_map[3] = p 
+                elif len(key_map[4] & p) == 3: 
+                    key_map[5] = p
+                else: 
+                    key_map[2] = p 
+            elif len(p) == 6: 
+                if key_map[4].issubset(p):
+                    key_map[9] = p 
+                elif key_map[7].issubset(p): 
+                    key_map[0] = p 
+                else: 
+                    key_map[6] = p
+
+        result_number = ''
+        for o in map(set, outputs): 
+            for number, mapping in key_map.items(): 
+                if o == mapping: 
+                    result_number += str(number)
+
+        result += int(result_number)
 
     return result
 
